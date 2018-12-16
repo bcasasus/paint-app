@@ -29,6 +29,25 @@ class Canvas extends Component {
 
             logic.setCurrentlyDrawing(true)
             logic.setPreviousPosition({ x, y })
+
+            const previousPosition = logic.getPreviousPosition()
+            const currentPosition = { x, y }
+            const selectedColor = logic.getLineColor()
+            const selectedWidth = logic.getLineWidth()
+
+            logic.addCoordinatesToCurrentLine({
+                moveTo: { ...previousPosition },
+                lineTo: { ...currentPosition },
+                color: selectedColor,
+                width: selectedWidth
+            })
+
+            this.draw({
+                previousPosition,
+                currentPosition,
+                selectedColor,
+                selectedWidth
+            })
         }
 
         // setup mouse move behavior (capture pointer position, update coordinates)
